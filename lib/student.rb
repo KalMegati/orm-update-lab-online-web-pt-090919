@@ -37,6 +37,10 @@ class Student
       VALUES (?, ?)
     SQL
     DB[:conn].execute(sql, self.name, self.grade)
+    sql = <<-SQL
+      SELECT id FROM students WHERE name = ?
+    SQL
+    self.id = DB[:conn].execute(sql, self.name)[0][0]
   end
     
   end
