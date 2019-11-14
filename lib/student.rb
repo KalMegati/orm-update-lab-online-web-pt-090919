@@ -32,15 +32,18 @@ class Student
   end
   
   def save
-    sql = <<-SQL
-      INSERT INTO students (name, grade)
-      VALUES (?, ?)
-    SQL
-    DB[:conn].execute(sql, self.name, self.grade)
-    sql = <<-SQL
-      SELECT id FROM students WHERE name = ?
-    SQL
-    self.id = DB[:conn].execute(sql, self.name)[0][0]
+    if self.id
+      
+    else
+      sql = <<-SQL
+        INSERT INTO students (name, grade)
+        VALUES (?, ?)
+      SQL
+      DB[:conn].execute(sql, self.name, self.grade)
+      sql = <<-SQL
+        SELECT id FROM students WHERE name = ?
+      SQL
+      self.id = DB[:conn].execute(sql, self.name)[0][0]
   end
 
 end
