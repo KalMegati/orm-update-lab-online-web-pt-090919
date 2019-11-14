@@ -42,7 +42,5 @@ class Student
     SQL
     self.id = DB[:conn].execute(sql, self.name)[0][0]
   end
-    
-  end
 
 end
